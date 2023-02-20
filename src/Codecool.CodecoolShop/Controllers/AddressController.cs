@@ -33,7 +33,7 @@ public class AddressController : Controller
             return View();
         }
 
-        _logger.LogInformation($"Address page tried to view on {DateTime.Now}");
+        _logger.LogInformation($"Address page tried to view on {DateTime.Now}"); //Data uzalezniona od lokalnej daty serwera. To blad lepiej uzywac po prostu polskiej daty zawsze lub utc.
         return RedirectToAction("Index", "Product");
     }
 
