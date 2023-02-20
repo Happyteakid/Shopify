@@ -91,7 +91,7 @@ public class CartController : Controller
     private void IncreaseProductQuantity(int? id)
     {
         var product = _context.OrderedProducts.Include(p => p.Order)
-            .First(p => p.ProductId == id && p.Order.OrderPayed == "No");
+            .First(p => p.ProductId == id && p.Order.OrderPayed == "No"); //parametr id jest nullable wiec na pewno ktos poda nulla keidys tam. Strzelisz do bazy danych z nullem na ProudctId. Baza nie najdzie takiego rekordu i poleci exception. Popraw tak by obsluzyc taki przypadek.
         product.Quantity++;
         _context.SaveChanges();
     }
@@ -105,7 +105,7 @@ public class CartController : Controller
         {
             var address = new Address
             {
-                City = "",
+                City = "", //czemu nie null albo String.Empty? Czy nie mozna w Address stworzyc statycznej klasy typu Address.CreateEmpty() i tam zainicjalizowac to do pustych stringow?
                 Country = "",
                 Email = "",
                 FullName = "",
