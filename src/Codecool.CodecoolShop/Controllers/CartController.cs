@@ -43,7 +43,7 @@ public class CartController : Controller
             var userId = _userManager.GetUserId(User);
             orderedProducts = _context.OrderedProducts
                 .Include(p => p.Order)
-                .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
+                .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No") //hardcoded value, co jezeli na bazie bedzie string z nazwa "NO" Wtedy Twoj kod nie zadziala. Albo daj to do consta/enuma zeby w calej aplikacji bylo wiadomo ze chodzi o te NO albo porownaj ten string niezaleznie od casingu liter
                 .ToList();
             return View(orderedProducts);
         }
